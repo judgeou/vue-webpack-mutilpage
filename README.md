@@ -1,3 +1,7 @@
+# 配置
+
+把html页面的地址写进这里config/html.js
+
 # manyvue
 
 > A Vue.js project
