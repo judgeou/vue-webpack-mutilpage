@@ -23,7 +23,7 @@ var plugins = [
     new webpack.optimize.OccurrenceOrderPlugin(),
     // extract css into its own file
     new ExtractTextPlugin(utils.assetsPath('css/[name].[contenthash].css')),
-    
+
 ]
 
 for(var key in htmls){
@@ -38,9 +38,7 @@ for(var key in htmls){
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
     },
-    chunks: ['vendor', key],
-    hash: true,
-    chunksSortMode: 'dependency'
+    chunks: ['manifest', 'vendor',key]
   }))
 }
 
@@ -48,7 +46,16 @@ plugins.push(
   // split vendor js into its own file
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      chunks: ['manifest']
+      minChunks: function (module, count) {
+        // any required modules inside node_modules are extracted to vendor
+        return (
+          module.resource &&
+          /\.js$/.test(module.resource) &&
+          module.resource.indexOf(
+            path.join(__dirname, '../node_modules')
+          ) === 0
+        )
+      }
     })
 )
 
