@@ -13,6 +13,13 @@
         },
         {
             "type": "node",
+            "request": "launch",
+            "name": "启动dev",
+            "program": "${workspaceRoot}/build/dev-server.js",
+            "cwd": "${workspaceRoot}"
+        },
+        {
+            "type": "node",
             "request": "attach",
             "name": "附加到进程",
             "port": 5858
