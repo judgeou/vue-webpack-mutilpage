@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div class="app">
     <img src="./assets/logo.png">
     <img src="./assets/a.gif"/>
     <hello></hello>
@@ -17,8 +17,8 @@ export default {
 }
 </script>
 
-<style>
-#app {
+<style scoped>
+div.app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
