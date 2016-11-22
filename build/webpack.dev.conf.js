@@ -28,7 +28,8 @@ Object.keys(htmls).forEach((key) => {
       new HtmlWebpackPlugin({
         filename: htmls[key] + '.html',
         template: htmls[key] + '.html',
-        inject: true
+        inject: true,
+        chunks: [key]
       })
   )
 })
