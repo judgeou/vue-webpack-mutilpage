@@ -18,11 +18,10 @@ for(var key in htmls){
   entries[key] = htmls[key] + '.js'
 }
 
-module.exports = {
+var base = {
   entry: entries,
   output: {
     path: config.build.assetsRoot,
-    //publicPath: process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
     filename: '[name].js'
   },
   resolve: {
@@ -97,3 +96,9 @@ module.exports = {
     ]
   }
 }
+
+if (process.env.NODE_ENV === 'development') {
+  base.output.publicPath = config.dev.assetsPublicPath
+}
+
+module.exports = base
