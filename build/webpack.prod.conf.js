@@ -38,7 +38,8 @@ for(var key in htmls){
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
     },
-    chunks: ['manifest', 'vendor',key]
+    chunks: ['manifest', 'vendor',key],
+    chunksSortMode: 'dependency'
   }))
 }
 
