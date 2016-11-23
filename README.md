@@ -6,6 +6,8 @@
 
 把html页面的地址写进这里config/html.js
 
+然后设置config/index.js里面的proxyTable
+
 # manyvue
 
 > A Vue.js project

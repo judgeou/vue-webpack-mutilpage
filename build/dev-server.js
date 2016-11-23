@@ -43,6 +43,15 @@ Object.keys(proxyTable).forEach(function (context) {
   app.use(proxyMiddleware(context, options))
 })
 
+// 如果有二级目录，则替换掉，让后面webpack等正常工作
+var subpath = config.dev.subpath
+if(subpath){
+  app.use((req, res, next) => {
+    req.url = req.url.replace('/'+subpath, '')
+    next();
+  });
+}
+
 // handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')())
 
@@ -62,7 +71,8 @@ module.exports = app.listen(port, function (err) {
     console.log(err)
     return
   }
-  var uri = 'http://localhost:' + port
+  
+  var uri = 'http://localhost:' + port + '/' + subpath
   console.log('Listening at ' + uri + '\n')
 
   // when env is testing, don't need open it

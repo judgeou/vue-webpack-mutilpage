@@ -1,5 +1,12 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 var path = require('path')
+var port = 8088;
+//url子路径
+var subpath = 'zggf_dz'
+//后端api代理配置
+var proxyTable = {
+  ['/'+subpath+'/api']: 'http://localhost:8080/'
+}
 
 module.exports = {
   build: {
@@ -18,15 +25,16 @@ module.exports = {
   },
   dev: {
     env: require('./dev.env'),
-    port: 8088,
+    port: port,
     assetsSubDirectory: 'dist/static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: proxyTable,
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README
     // (https://github.com/webpack/css-loader#sourcemaps)
     // In our experience, they generally work as expected,
     // just be aware of this issue when enabling this option.
-    cssSourceMap: false
+    cssSourceMap: false,
+    subpath: subpath
   }
 }
