@@ -2,10 +2,10 @@
 var path = require('path')
 var port = 8088;
 //url子路径
-var subpath = 'zggf_dz'
+var subpath = ''
 //后端api代理配置
 var proxyTable = {
-  ['/'+subpath+'/api']: 'http://localhost:8080/'
+  ['/' + subpath + '/api']: 'http://localhost:8080/'
 }
 
 module.exports = {

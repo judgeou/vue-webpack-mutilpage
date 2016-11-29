@@ -1,7 +1,6 @@
 <template>
   <div class="app">
     <img src="./assets/logo.png">
-    <img src="./assets/a.gif"/>
     <hello></hello>
   </div>
 </template>
