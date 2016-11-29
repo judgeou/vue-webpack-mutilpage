@@ -27,9 +27,17 @@ var plugins = [
 ]
 
 for(var key in htmls){
+  var h = htmls[key]
+  var isString = typeof h === 'string'
+  var filepath = isString ? h : h.path
+  var chunks = ['manifest']
+  if(isString || !h.vue_runtime){
+    chunks.push('vendor')
+  }
+  chunks.push(key)
   plugins.push(new HtmlWebpackPlugin({
-    filename: htmls[key] + '_build.html',
-    template: htmls[key] + '.html',
+    filename: filepath + '_build.html',
+    template: filepath + '.html',
     inject: true,
     minify: {
         removeComments: true,
@@ -38,7 +46,7 @@ for(var key in htmls){
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
     },
-    chunks: ['manifest', 'vendor',key],
+    chunks: chunks,
     chunksSortMode: 'dependency'
   }))
 }

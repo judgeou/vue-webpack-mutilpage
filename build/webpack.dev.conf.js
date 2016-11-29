@@ -23,11 +23,15 @@ var plugins = [
 ]
 
 Object.keys(htmls).forEach((key) => {
+  var h = htmls[key]
+  var isString = typeof h === 'string'
+  var path = isString ? h : h.path
+  console.log(key, path)
   plugins.push(
     // https://github.com/ampedandwired/html-webpack-plugin
       new HtmlWebpackPlugin({
-        filename: htmls[key] + '.html',
-        template: htmls[key] + '.html',
+        filename: path + '.html',
+        template: path + '.html',
         inject: true,
         chunks: [key]
       })

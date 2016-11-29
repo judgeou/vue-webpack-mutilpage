@@ -15,7 +15,13 @@ var useCssSourceMap = cssSourceMapDev || cssSourceMapProd
 
 var entries = {}
 for(var key in htmls){
-  entries[key] = htmls[key] + '.js'
+  var h = htmls[key]
+  if(typeof h === 'string'){
+    entries[key] = h + '.js'
+  }else{
+    entries[key] = h.path + '.js'
+  }
+  
 }
 
 var base = {
