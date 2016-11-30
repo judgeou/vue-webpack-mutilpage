@@ -1,7 +1,7 @@
 {
   "name": "vue-webpack-mutilpage",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "多html入口的vue cli项目",
   "author": "judgeou <judgeou@vip.qq.com>",
   "private": true,
   "scripts": {
