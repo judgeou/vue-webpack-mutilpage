@@ -1,8 +1,18 @@
-# 前言
+# 目录
 
-就是想嵌入已有的项目
+- [教程](#教程)
+  - [创建一个全新的页面](#创建一个全新的页面)
+  - [进行开发工作](#进行开发工作)
+  - [进行生产发布](#进行生产发布)
+  - [在现有的页面中使用vue文件组件](#在现有的页面中使用vue文件组件)
+- [配置](#配置)
 
 # 教程
+
+在此之前先执行
+```bash
+npm install
+```
 
 ## 创建一个全新的页面
 
@@ -100,7 +110,7 @@ div.app {
 > * [vue组件](https://vuefe.cn/v2/guide/components.html)
 > * [关于vue文件](https://vuefe.cn/v2/guide/single-file-components.html)
 
-## 如何进行开发工作
+## 进行开发工作
 
 ```bash
 # 启动http服务，默认端口8088
@@ -110,18 +120,59 @@ npm run dev
 
 每当我们修改vue文件时，将会自动实现局部刷新，若修改的是html或者js则会自动刷新整个页面。
 
-ESLint 将会对vue文件生效，一旦vue文件发生语法错误或者触发ESLint规则都会即时在页面提示
-![](http://i1.piimg.com/567571/68f47863698323f7.jpg)
+> ESLint 将会对vue文件生效，一旦vue文件发生语法错误或者触发ESLint规则都会即时在页面提示
+>
+> ![](http://i1.piimg.com/567571/68f47863698323f7.jpg)
 
-## 如何进行生产发布
+## 进行生产发布
 
 ```bash
 npm run build
 ```
 执行完毕后，将会在html文件的目录下生成一个"文件名+_build.html"的html文件，正式生产环境应把链接地址替换成此文件。
 
-之所以采取这种方式，是因为能够良好的兼容一些已经存在的项目，这些项目的页面往往需要很多额外的js，css等文件的引入，
+> 之所以采取这种方式，是因为能够良好的兼容一些已经存在的项目，这些项目的页面往往需要很多额外的js，css等文件的引入，
 为了使用相对地址的同时网页不受影响，必须把_build.html文件放在与原文件同一目录。
+
+## 在现有的页面中使用vue文件组件
+
+如果页面比较简单，我们当然最推荐直接将整个网页改造成vue组件，这样可以最大限度享受上面我提到的好处。
+
+如果页面复杂，改动很大，又或者不兼容等问题，我们可以选择使用独立版vue+vue文件组件的方案，请参考如下步骤。
+
+1. 在页面中引入 `<script src="../js/vue.js"></script>`
+2. 在 `config/html.js` 里面作如下配置（以 `oldpage/old1.html` 为例子）：
+
+    ```javascript
+    var htmls = {
+      'oldpage/old1': {
+          path: './oldpage/old1',
+          vue_runtime: true
+      }
+    }
+    ```
+    将vue_runtime属性设置为true，生成html的时候，则不会引入构建版的vue
+    
+    >因为你已经在页面手动引入了独立版的vue了
+
+3. 我们依旧需要一个同名js。在 `old1.js` 中声明vue，并引入你需要使用的组件
+    ```javascript
+    import Hello from '../src/components/Hello'
+
+    /* eslint-disable no-new,no-undef */
+    new Vue({
+      el: '#old1',
+      components: {
+        Hello
+      },
+      data: {
+        msg: 'this is old page'
+      }
+    })
+    ```
+    注意别把 Vue 给 import 进来了，这里的写法具体可以参考 [vue.js起步](https://vuefe.cn/v2/guide/#起步)
+4. 在页面使用你的组件标签即可。
+    > 注意生成环境依旧需要使用生成的_build.html文件
 
 # 配置
 
