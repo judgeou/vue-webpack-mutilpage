@@ -141,6 +141,7 @@ npm run build
 如果页面复杂，改动很大，又或者不兼容等问题，我们可以选择使用独立版vue+vue文件组件的方案，请参考如下步骤。
 
 1. 在页面中引入 `<script src="../js/vue.js"></script>`
+
 2. 在 `config/html.js` 里面作如下配置（以 `oldpage/old1.html` 为例子）：
 
     ```javascript
@@ -171,8 +172,10 @@ npm run build
     })
     ```
     注意别把 Vue 给 import 进来了，这里的写法具体可以参考 [vue.js起步](https://vuefe.cn/v2/guide/#起步)
+
 4. 在页面使用你的组件标签即可。
-    > 注意生成环境依旧需要使用生成的_build.html文件
+    
+    > 注意生产环境依旧需要使用生成的_build.html文件
 
 # 配置
 
