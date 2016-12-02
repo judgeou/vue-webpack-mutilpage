@@ -183,6 +183,8 @@ npm run build
 
 然后设置config/index.js里面的proxyTable，用来反向代理后端请求
 
+当你的项目有子路径时，如：`http://localhost:8080/app1`，需要配置 `config/index.js` 里面的 `subpath`
+
 ## Build Setup
 
 ``` bash
