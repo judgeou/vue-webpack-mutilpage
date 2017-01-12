@@ -13,6 +13,8 @@ module.exports = {
   ],
   // add your custom rules here
   'rules': {
+    // no var
+    'no-var': ['warn'],
     // allow paren-less arrow functions
     'arrow-parens': 0,
     // allow async-await
