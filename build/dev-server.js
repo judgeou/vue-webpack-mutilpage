@@ -52,6 +52,12 @@ if(subpath){
   });
 }
 
+// 替换_build.html到.html，自动转为开发模式页面
+app.use((req, res, next) => {
+  req.url = req.url.replace('_build.html', '.html')
+  next()
+})
+
 // handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')())
 
@@ -71,7 +77,7 @@ module.exports = app.listen(port, function (err) {
     console.log(err)
     return
   }
-  
+
   var uri = 'http://localhost:' + port + (subpath? ('/' + subpath + '/index.html'): '')
   console.log('Listening at ' + uri + '\n')
 

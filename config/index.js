@@ -1,11 +1,19 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 var path = require('path')
 var port = 8088;
+var backPort = 8080;
 //url子路径
-var subpath = ''
+var subpath = 'zggf_hz'
 //后端api代理配置
 var proxyTable = {
-  ['/' + subpath + '/api']: 'http://localhost:8080/'
+  ['/' + subpath + '/api']: { target: `http://localhost:${backPort}/` },
+  ['/' + subpath + '/manage']: { target: `http://localhost:${backPort}/` },
+  ['/' + subpath + '/business']: { target: `http://localhost:${backPort}/` },
+  ['/' + subpath + '/common']: { target: `http://localhost:${backPort}/` },
+  ['/' + subpath + '/lover']: {
+    target: `http://localhost:${backPort}/`,
+    ws: true
+  }
 }
 
 module.exports = {
